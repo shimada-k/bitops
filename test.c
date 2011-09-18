@@ -5,13 +5,53 @@
 /*
 	test.c:bitops.cのテストプログラム
 	written by shimada-k
-	last modify 2011.6.17
+	last modify 2011.9.18
 */
+
+void rotate_test8(void)
+{
+	int i;
+	unsigned char hoge = 0;
+
+	puts("rotate_test");
+
+	print_binary8(hoge);	/* 表示テスト */
+
+	putchar('\n');
+
+	for(i = 0; i < 8; i += 2){
+		set_nbit8(&hoge, i);	/* 0から1個飛ばしにビットをセット */
+	}
+
+	print_binary8(hoge);	/* 表示 */
+	putchar('\n');
+
+	for(i = 1; i < 8; i += 2){
+		set_nbit8(&hoge, i);	/* 1から1個飛ばしにビットをセット */
+	}
+
+	print_binary8(hoge);	/* 表示 */
+	putchar('\n');
+
+	for(i = 0; i < 8; i += 2){		/* 0から1個飛ばしにビットを反転 */
+		rotate_nbit8(&hoge, i);
+	}
+
+	print_binary8(hoge);	/* 表示 */
+	putchar('\n');
+
+	for(i = 1; i < 8; i += 2){		/* 1から1個飛ばしにビットを反転 */
+		rotate_nbit8(&hoge, i);
+	}
+
+	print_binary8(hoge);	/* 表示 */
+	putchar('\n');
+}
 
 void rotate_test32(void)
 {
 	int i;
-	u32 hoge = 0;
+	unsigned int hoge = 0;
 
 	puts("rotate_test");
 
@@ -51,7 +91,7 @@ void rotate_test32(void)
 void rotate_test64(void)
 {
 	int i;
-	u64 hoge = 0;
+	unsigned long long hoge = 0;
 
 	puts("rotate_test");
 
@@ -88,10 +128,46 @@ void rotate_test64(void)
 	putchar('\n');
 }
 
+void bitpos_test8(void)
+{
+	int i;
+	unsigned char hoge = 0;
+
+	puts("bitpos_test");
+
+	for(i = 0; i < 8; i += 2){		/* 0から1個飛ばしにビットをセット */
+		set_nbit8(&hoge, i);
+	}
+
+	print_binary8(hoge);	/* 表示 */
+	putchar('\n');
+
+	for(i = 0; i < 8; i = find_next_setbit32(hoge, i)){
+		clr_nbit8(&hoge, i);
+	}
+
+	print_binary8(hoge);	/* 表示 */
+	putchar('\n');
+
+	for(i = 1; i < 8; i *= 2){		/* 1からiの2倍の間隔を空けながらビットをセット */
+		set_nbit8(&hoge, i);
+	}
+
+	print_binary8(hoge);	/* 表示 */
+	putchar('\n');
+
+	for(i = 0; i < 8; i = find_next_setbit32(hoge, i)){
+		clr_nbit8(&hoge, i);
+	}
+
+	print_binary8(hoge);	/* 表示 */
+	putchar('\n');
+}
+
 void bitpos_test32(void)
 {
 	int i;
-	u32 hoge = 0;
+	unsigned int hoge = 0;
 
 	puts("bitpos_test");
 
@@ -127,7 +203,7 @@ void bitpos_test32(void)
 void bitpos_test64(void)
 {
 	int i;
-	u64 hoge = 0;
+	unsigned long long hoge = 0;
 
 	puts("bitpos_test");
 
@@ -168,7 +244,12 @@ int main(int argc, char *argv[])
 		bit_width = atoi(argv[1]);
 	}
 
-	if(bit_width == 32){
+	if(bit_width == 8){
+		puts("----8 bit operation----");
+		rotate_test8();
+		bitpos_test8();
+	}
+	else if(bit_width == 32){
 		puts("----32 bit operation----");
 		rotate_test32();
 		bitpos_test32();

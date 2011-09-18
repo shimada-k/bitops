@@ -5,22 +5,29 @@
 							puts(":out of order");	\
 						}
 
-typedef unsigned long u32;
+/* 8bit operation APIs */
+unsigned int pick_nbit8(unsigned char num, unsigned int n);
+void set_nbit8(unsigned char *num, unsigned int n);
+void clr_nbit8(unsigned char *num, unsigned int n);
+void rotate_nbit8(unsigned char *num, unsigned int n);
+unsigned int find_first_setbit8(unsigned char num);
+unsigned int find_next_setbit8(unsigned char num, unsigned int n);
+void print_binary8(unsigned char num);
 
-u32 pick_nbit32(u32 num, u32 n);
-void set_nbit32(u32 *num, u32 n);
-void clr_nbit32(u32 *num, u32 n);
-void rotate_nbit32(u32 *num, u32 n);
-u32 find_first_setbit32(u32 num);
-u32 find_next_setbit32(u32 num, u32 n);
-void print_binary32(u32 num);
+/* 32bit operation APIs */
+unsigned int pick_nbit32(unsigned int num, unsigned int n);
+void set_nbit32(unsigned int *num, unsigned int n);
+void clr_nbit32(unsigned int *num, unsigned int n);
+void rotate_nbit32(unsigned int *num, unsigned int n);
+unsigned int find_first_setbit32(unsigned int num);
+unsigned int find_next_setbit32(unsigned int num, unsigned int n);
+void print_binary32(unsigned int num);
 
-typedef unsigned long long u64;
-
-u32 pick_nbit64(u64 num, u32 n);
-void set_nbit64(u64 *num, u32 n);
-void clr_nbit64(u64 *num, u32 n);
-void rotate_nbit64(u64 *num, u32 n);
-u32 find_first_setbit64(u64 num);
-u32 find_next_setbit64(u64 num, u32 n);
-void print_binary64(u64 num);
+/* 64bit operation APIs */
+unsigned int pick_nbit64(unsigned long long num, unsigned int n);
+void set_nbit64(unsigned long long *num, unsigned int n);
+void clr_nbit64(unsigned long long *num, unsigned int n);
+void rotate_nbit64(unsigned long long *num, unsigned int n);
+unsigned int find_first_setbit64(unsigned long long num);
+unsigned int find_next_setbit64(unsigned long long num, unsigned int n);
+void print_binary64(unsigned long long num);

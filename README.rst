@@ -18,6 +18,44 @@ bitops -C言語用ビット操作ライブラリ-
 
 bitops.cでは以下のAPIを提供しています。
 
+.. list-table:: API一覧
+   :header-rows: 1
+   :stub-columns: 1
+
+   * - ビット幅
+     - 8ビット
+     - 32ビット
+     - 64ビット
+   * - 指定された桁のビットの値（0 or 1）を調べる関数
+     - pick_nbit8
+     - pick_nbit32
+     - pick_nbit64
+   * - 指定された桁のビットを1にする関数
+     - set_nbit8
+     - set_nbit32
+     - set_nbit64
+   * - 指定された桁のビットを0にする関数
+     - clr_nbit8
+     - clr_nbit32
+     - clr_nbit64
+   * - 指定された桁のビットを反転する関数
+     - rotate_nbit8
+     - rotate_nbit32
+     - rotate_nbit64
+   * - 最初に1になっているビットの桁数を返す関数
+     - find_first_setbit8
+     - find_first_setbit32
+     - find_first_setbit64
+   * - 指定された桁の次に1になっているビットの桁数を返す関数
+     - clr_nbit8
+     - clr_nbit32
+     - clr_nbit64
+   * - 2進数で標準出力に値を出力する関数
+     - print_binary8
+     - print_binary32
+     - print_binary64
+
+
 8bit変数操作API
 -----------------
 

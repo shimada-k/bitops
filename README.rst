@@ -56,9 +56,11 @@ bitops.cでは以下のAPIを提供しています。
      - print_binary32
      - print_binary64
 
+プロトタイプ
+-------------
 
 8bit変数操作API
------------------
+^^^^^^^^^^^^^^^
 
 unsigned int pick_nbit8(unsigned char num, unsigned int n);
 
@@ -75,7 +77,7 @@ unsigned int find_next_setbit8(unsigned char num, unsigned int n);
 void print_binary8(unsigned char num);
 
 32bit変数操作API
------------------
+^^^^^^^^^^^^^^^
 
 unsigned int pick_nbit32(unsigned int num, unsigned int n);
 
@@ -92,7 +94,7 @@ unsigned int find_next_setbit32(unsigned int num, unsigned int n);
 void print_binary32(unsigned int num);
 
 64bit変数操作API
------------------
+^^^^^^^^^^^^^^^
 
 unsigned int pick_nbit64(unsigned long long num, unsigned int n);
 

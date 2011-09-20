@@ -12,6 +12,7 @@ bitops -C言語用ビット操作ライブラリ-
 するだけです。
 
 ::
+
     gcc -c YourProgramName.c
     gcc -c bitops.c
     gcc -o YourProgramName YourProgramName.o bitops.o

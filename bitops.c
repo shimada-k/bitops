@@ -6,7 +6,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdlib.h>
+#include <string.h>
 #include "bitops.h"
+
+/*
+*
+* BITOPS APIs
+*
+*/
+
 
 /*
 *
@@ -380,5 +389,117 @@ void print_binary64(unsigned long long num)
 			i--;
 	}
 	putchar('\n');
+}
+
+
+/*
+*
+* BITSTREAM APIs
+*
+*/
+
+/*
+	データをストリーム化する関数
+	@raw 呼出側が指定するビットストリーム化したいデータ
+	@count rawのサイズ
+*/
+BSTREAM *openBitStream(const void *raw, size_t count, const char *mode)
+{
+	BSTREAM *bs;
+
+	bs = malloc(sizeof(BSTREAM));
+
+	bs->raw_data = malloc(count);
+
+	memset(bs->raw_data, '0', count);
+
+	if(strcmp(mode, "r") == 0 && raw){	/* 読み込みモードでもopenだったら */
+		memcpy(bs->raw_data, raw, count);	/* 呼出側のデータをコピー */
+	}
+
+	bs->raw_data_length = count;
+	bs->focus = bs->raw_data;
+	bs->bit_pos = 0;
+
+	return bs;
+}
+
+/*
+	データを読み出す関数
+	return ビットの内容(1 or 0) データが終了したら-1を返す
+*/
+int readBitStream(BSTREAM *stream)
+{
+	unsigned int bit;
+	static int current_idx;
+
+	if(stream->bit_pos > 7){
+		if(current_idx < stream->raw_data_length - 1){
+			stream->focus++;
+			stream->bit_pos = 0;
+			current_idx++;
+		}
+		else{
+			return -1;
+		}
+	}
+
+	bit = pick_nbit8(*((unsigned char *)stream->focus), stream->bit_pos);
+
+	stream->bit_pos++;
+
+	return bit;
+
+}
+
+/*
+	データを書き込む関数
+	@stream ビットストリームのアドレス
+	@bit ビットの内容（0 or 1）
+	return 成功:0 データの書き込みが終了したら-1を返す
+*/
+int writeBitStream(BSTREAM *stream, int bit)
+{
+	static int current_idx = 0;
+	char c;
+
+	if(stream->bit_pos > 7){
+		if(current_idx < stream->raw_data_length - 1){
+#ifdef DEBUG
+			memcpy((void *)&c, stream->focus, 1);
+			putchar(c);
+			putchar('\n');
+#endif
+			stream->focus++;
+			stream->bit_pos = 0;
+			current_idx++;
+		}
+		else{
+#ifdef DEBUG
+			printf("current_idx=%d\n", current_idx);
+#endif
+			return -1;
+		}
+	}
+
+	if(bit == 0){
+		clr_nbit8((unsigned char *)stream->focus, stream->bit_pos);
+	}
+	else if(bit == 1){
+		set_nbit8((unsigned char *)stream->focus, stream->bit_pos);
+	}
+
+	stream->bit_pos++;
+
+	return 0;
+}
+
+/* 
+	ストリームを解放する関数
+*/
+void closeBitStream(BSTREAM *stream)
+{
+	free(stream->raw_data);
+	free(stream);
 }
 

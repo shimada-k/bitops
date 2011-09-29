@@ -11,4 +11,4 @@ bitops.o: bitops.c bitops.h
 	cc -Wall -c bitops.c
 
 clean:
-	rm -f shalend *.o *~
+	rm -f *.o *~

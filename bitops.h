@@ -31,3 +31,18 @@ void rotate_nbit64(unsigned long long *num, unsigned int n);
 unsigned int find_first_setbit64(unsigned long long num);
 unsigned int find_next_setbit64(unsigned long long num, unsigned int n);
 void print_binary64(unsigned long long num);
+
+/* BITSTREAM */
+
+typedef struct BitStream{
+	void *raw_data;		/* データが格納されるメモリ領域 */
+	int raw_data_length;		/* 指定されたデータの長さ（バイト） */
+
+	unsigned int bit_pos;	/* focusの内何ビット目を次に渡すか */
+	void *focus;			/* 現在焦点があっているraw_data上の値 */
+}BSTREAM;
+
+BSTREAM *openBitStream(const void *raw, size_t count, const char *mode);
+int readBitStream(BSTREAM *stream);
+int writeBitStream(BSTREAM *stream, int bit);
+void closeBitStream(BSTREAM *stream);

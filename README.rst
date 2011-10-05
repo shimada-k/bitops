@@ -127,6 +127,30 @@ BSTREAM-Framework
 BSTREAM-Frameworkは、ビットストリームを扱う時の関数群です。内部でbitops-APIsをコールしています。
 
 ビットストリームとは、固定長のあるバイト列において、ビットの内容を低位ビットから順番に返していくというデータ構造です。
+返す値は0/1でunsigned intの値になっています。
 
-返す値は0or1でunsigned intの値になっています。
+使い方としては以下のような感じです。
 
+::
+
+int i;
+unsigned int bit;
+char buf[9];
+BSTREAM *read_bs, *write_bs;
+
+memcpy(buf, "hogehoge", 9);
+
+read_bs = openBitStream(buf, 9, "r");
+write_bs = openBitStream(NULL, 9, "w");
+
+for(i = 0; i < 9 * 8; i++){
+	bit = readBitStream(read_bs);
+	writeBitStream(write_bs, bit);
+}
+
+printBitStream(write_bs);
+
+closeBitStream(bs);
+closeBitStream(bs);
+
+buf[9]に入っている"hogehoge"というデータをビットストーム経由でコピーするプログラム例です。

@@ -1,7 +1,18 @@
 bitops -C言語用ビット操作ライブラリ-
-=================================
+====================================
 
-ある変数のアドレスを受け取って指定された桁数のビットを操作するライブラリです。
+ビット演算を行うときのライブラリです。bitosは以下の２種類のAPIが存在します。
+
+*bitos-APIs
+*BSTREAM-Framework
+
+bitops-APIsは、ある変数のアドレスを受け取って指定された桁数のビットを操作するライブラリです。
+BSTREAM-Frameworkは、ビットストリームを扱う時の関数群です。
+
+ここからは種類別のドキュメントになっています。
+
+bitops-APIs
+-------------
 
 今何ビット幅の処理をやっているか、ということを意識できるように変数のビット幅
 ごとに関数を分けています。
@@ -109,4 +120,8 @@ unsigned int find_first_setbit64(unsigned long long num);
 unsigned int find_next_setbit64(unsigned long long num, unsigned int n);
 
 void print_binary64(unsigned long long num);
+
+
+BSTREAM-Framework
+--------------------
 

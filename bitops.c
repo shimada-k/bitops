@@ -402,16 +402,17 @@ void print_binary64(unsigned long long num)
 	データをストリーム化する関数
 	@raw 呼出側が指定するビットストリーム化したいデータ
 	@count rawのサイズ
+	return 成功:BSTREAMのアドレス 失敗:NULL
 */
 BSTREAM *openBitStream(const void *raw, size_t count, const char *mode)
 {
-	BSTREAM *bs;
+	BSTREAM *bs = NULL;
 
 	bs = malloc(sizeof(BSTREAM));
 
 	bs->raw_data = malloc(count);
 
-	memset(bs->raw_data, '0', count);
+	memset(bs->raw_data, 0, count);
 
 	if(strcmp(mode, "r") == 0 && raw){	/* 読み込みモードでもopenだったら */
 		memcpy(bs->raw_data, raw, count);	/* 呼出側のデータをコピー */
@@ -461,11 +462,11 @@ int readBitStream(BSTREAM *stream)
 int writeBitStream(BSTREAM *stream, int bit)
 {
 	static int current_idx = 0;
-	char c;
 
 	if(stream->bit_pos > 7){
 		if(current_idx < stream->raw_data_length - 1){
 #ifdef DEBUG
+			char c;
 			memcpy((void *)&c, stream->focus, 1);
 			putchar(c);
 			putchar('\n');

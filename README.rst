@@ -82,7 +82,7 @@ bitops.cでは以下のAPIを提供しています。
 
 32bit変数操作API
 ^^^^^^^^^^^^^^^^
- ::
+::
 	unsigned int pick_nbit32(unsigned int num, unsigned int n);
 	void set_nbit32(unsigned int *num, unsigned int n);
 	void clr_nbit32(unsigned int *num, unsigned int n);
@@ -92,8 +92,7 @@ bitops.cでは以下のAPIを提供しています。
 	void print_binary32(unsigned int num);
 
 64bit変数操作API
-^^^^^^^^^^^^^^^^
- ::
+^^^^^^^^^^^^^^^^ ::
 	unsigned int pick_nbit64(unsigned long long num, unsigned int n);
 	void set_nbit64(unsigned long long *num, unsigned int n);
 	void clr_nbit64(unsigned long long *num, unsigned int n);

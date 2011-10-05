@@ -3,16 +3,15 @@ bitops -C言語用ビット操作ライブラリ-
 
 ビット演算を行うときのライブラリです。bitosは以下の２種類のAPIが存在します。
 
-*bitos-APIs
-*BSTREAM-Framework
+* bitos-APIs
+* BSTREAM-Framework
 
-bitops-APIsは、ある変数のアドレスを受け取って指定された桁数のビットを操作するライブラリです。
-BSTREAM-Frameworkは、ビットストリームを扱う時の関数群です。
-
-ここからは種類別のドキュメントになっています。
+種類別のドキュメントになっています。
 
 bitops-APIs
 -------------
+
+bitops-APIsは、ある変数のアドレスを受け取って指定された桁数のビットを操作するライブラリです。
 
 今何ビット幅の処理をやっているか、ということを意識できるように変数のビット幅
 ごとに関数を分けています。
@@ -88,7 +87,7 @@ unsigned int find_next_setbit8(unsigned char num, unsigned int n);
 void print_binary8(unsigned char num);
 
 32bit変数操作API
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 unsigned int pick_nbit32(unsigned int num, unsigned int n);
 
@@ -105,7 +104,7 @@ unsigned int find_next_setbit32(unsigned int num, unsigned int n);
 void print_binary32(unsigned int num);
 
 64bit変数操作API
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 unsigned int pick_nbit64(unsigned long long num, unsigned int n);
 
@@ -124,4 +123,10 @@ void print_binary64(unsigned long long num);
 
 BSTREAM-Framework
 --------------------
+
+BSTREAM-Frameworkは、ビットストリームを扱う時の関数群です。内部でbitops-APIsをコールしています。
+
+ビットストリームとは、固定長のあるバイト列において、ビットの内容を低位ビットから順番に返していくというデータ構造です。
+
+返す値は0or1でunsigned intの値になっています。
 

@@ -69,8 +69,7 @@ bitops.cでは以下のAPIを提供しています。
 プロトタイプ
 -------------
 
-8bit変数操作API
-^^^^^^^^^^^^^^^ ::
+8bit変数操作API ::
 
 	unsigned int pick_nbit8(unsigned char num, unsigned int n);
 	void set_nbit8(unsigned char *num, unsigned int n);
